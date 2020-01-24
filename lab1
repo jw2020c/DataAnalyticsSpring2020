@@ -1,0 +1,27 @@
+
+library("readxl")
+setwd("C:/Users/23721/Downloads/data")
+data <- read_xls("2010EPI_data.xls",sheet = "EPI2010_onlyEPIcountries")
+
+attach(data)
+data1 <- read.csv(file = choose.files(),header = T)
+EPI[!is.na(EPI)]
+stem(EPI)
+summary(EPI)
+hist(EPI,seq(30,95,1),probability = T) 
+lines(density(EPI,na.rm = T,bw = 1))
+rug(EPI)
+plot(ecdf(EPI),do.points=F,verticals = T)
+par(pty="s")
+qqnorm(EPI)
+boxplot(EPI,DALY)
+
+qqplot(qt(ppoints(250), df = 5), c(30:95), xlab = "Q-Q plot for t dsn")
+
+EPIland <- EPI[!Landlock]
+Eland <- EPIland[!is.na(EPIland)]
+hist(Eland,c(30:95),prob=T)
+lines(density(Eland,na.rm=T,bw=1))
+
+water <- read.csv("water-treatment.csv",header = T)
+head(water)
